@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class PickUpManager : MonoBehaviour
 {
     public bool isFever = false;
+
+    public GameObject text;
+    public GameObject canvas;
+
     private void OnTriggerEnter(Collider other)
     {
         switch (other.tag)
@@ -25,6 +29,7 @@ public class PickUpManager : MonoBehaviour
                 if (GlobalAccess.Instance.playerColorEnum == other.GetComponent<Human>().colorEnum || isFever)
                 {
                     GlobalAccess.Instance.score.AddScore(1);
+                    Instantiate(text, Camera.main.WorldToScreenPoint(transform.position), Quaternion.identity, canvas.transform);
                     Destroy(other.gameObject);
                 }
                 else
